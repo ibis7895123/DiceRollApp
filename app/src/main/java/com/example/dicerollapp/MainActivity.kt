@@ -1,10 +1,10 @@
 package com.example.dicerollapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,25 +20,37 @@ class MainActivity : AppCompatActivity() {
             toast.show()
 
             // ダイスを振って結果を出力する
-            rollDices()
+            rollDice()
         }
+
+        // アプリ起動時にダイスを振る
+        rollDice()
     }
 
     /**
      * ダイスを振る
      */
-    private fun rollDices() {
-        val dice1 = Dice(6)
-        val resultDiceRoll1 = dice1.roll()
+    private fun rollDice() {
+        val dice = Dice(6)
+        val resultDiceRoll = dice.roll()
 
-        val resultTextView1: TextView = findViewById(R.id.resultTextView)
-        resultTextView1.text = resultDiceRoll1.toString()
+        val diceImage: ImageView = findViewById(R.id.imageView)
 
-        val dice2 = Dice(6)
-        val resultDiceRoll2 = dice2.roll()
+        // ダイスの値に応じた画像をセット
+        val imageId = when (resultDiceRoll) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            6 -> R.drawable.dice_6
+            else -> R.drawable.dice_1 // エラーハンドリング, 念の為
+        }
+        diceImage.setImageResource(imageId)
 
-        val resultTextView2: TextView = findViewById(R.id.resultTextView2)
-        resultTextView2.text = resultDiceRoll2.toString()
+        // コンテンツの説明に出目の数字を入れる
+        // スクリーンリーダー用
+        diceImage.contentDescription = resultDiceRoll.toString()
     }
 }
 
