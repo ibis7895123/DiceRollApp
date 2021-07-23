@@ -20,19 +20,25 @@ class MainActivity : AppCompatActivity() {
             toast.show()
 
             // ダイスを振って結果を出力する
-            rollDice()
+            rollDices()
         }
     }
 
     /**
      * ダイスを振る
      */
-    private fun rollDice() {
-        val dice = Dice(6)
-        val resultDiceRoll = dice.roll()
+    private fun rollDices() {
+        val dice1 = Dice(6)
+        val resultDiceRoll1 = dice1.roll()
 
-        val resultTextView: TextView = findViewById(R.id.resultTextView)
-        resultTextView.text = resultDiceRoll.toString()
+        val resultTextView1: TextView = findViewById(R.id.resultTextView)
+        resultTextView1.text = resultDiceRoll1.toString()
+
+        val dice2 = Dice(6)
+        val resultDiceRoll2 = dice2.roll()
+
+        val resultTextView2: TextView = findViewById(R.id.resultTextView2)
+        resultTextView2.text = resultDiceRoll2.toString()
     }
 }
 
